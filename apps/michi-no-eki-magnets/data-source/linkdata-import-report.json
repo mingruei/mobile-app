@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-08-21T12:49:40.043Z",
+  "source": "http://linkdata.org/api/1/rdf1s2861i/roadside_station.csv",
+  "format": "csv",
+  "stationCount": 1200,
+  "skippedCount": 25,
+  "skippedByReason": {
+    "status:廃止": 4,
+    "missing-core-fields": 7,
+    "missing-coordinates": 13,
+    "status:empty": 1
+  },
+  "attribution": "「国土数値情報（道の駅データ）」（国土交通省）をもとに東京福祉専門学校IT医療ソーシャルワーカー科作成（LinkData rdf1s2861i）"
+}

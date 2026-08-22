@@ -1,0 +1,11 @@
+{
+  "version": 7,
+  "updatedAt": "2026-08-21T05:21:10.079Z",
+  "files": {
+    "stations": {
+      "path": "hokkaido-countries.json",
+      "size": 102504,
+      "sha256": "ddae053e3ad13991fe6758c4eea2ffa974e01e83872f9dc460bedfd26e3313fe"
+    }
+  }
+}

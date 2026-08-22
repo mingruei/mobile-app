@@ -1,0 +1,35 @@
+{
+  "name": "mobile-app",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "michi:start": "npm run start -w michi-no-eki-magnets",
+    "michi:test": "npm test -w michi-no-eki-magnets",
+    "michi:tsc": "npm exec -w michi-no-eki-magnets -- tsc --noEmit",
+    "michi:ios": "npm run ios -w michi-no-eki-magnets",
+    "michi:android": "npm run android -w michi-no-eki-magnets",
+    "michi:build:ios": "npm run build:ios -w michi-no-eki-magnets",
+    "michi:build:android": "npm run build:android -w michi-no-eki-magnets",
+    "hokkaido:start": "npm run start -w hokkaido-rural-magnets",
+    "hokkaido:test": "npm test -w hokkaido-rural-magnets",
+    "hokkaido:tsc": "npm exec -w hokkaido-rural-magnets -- tsc --noEmit",
+    "hokkaido:ios": "npm run ios -w hokkaido-rural-magnets",
+    "hokkaido:android": "npm run android -w hokkaido-rural-magnets",
+    "hokkaido:build:ios": "npm run build:ios -w hokkaido-rural-magnets",
+    "hokkaido:build:android": "npm run build:android -w hokkaido-rural-magnets",
+    "hokkaido:build:android:local": "npm run build:android:local -w hokkaido-rural-magnets",
+    "castles:start": "npm run start -w japan-castles-map",
+    "castles:test": "npm test -w japan-castles-map",
+    "castles:tsc": "npm exec -w japan-castles-map -- tsc --noEmit",
+    "castles:ios": "npm run ios -w japan-castles-map",
+    "castles:android": "npm run android -w japan-castles-map",
+    "castles:build:android:local": "npm run build:android:local -w japan-castles-map",
+    "castles:build:ios": "npm run build:ios -w japan-castles-map",
+    "castles:build:android": "npm run build:android -w japan-castles-map"
+  },
+  "devDependencies": {
+    "react-test-renderer": "19.1.0"
+  }
+}

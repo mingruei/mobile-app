@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-08-21T05:21:10.041Z",
+  "source": "/Users/Jared/Projects/mobile-app/apps/hokkaido-rural-magnets/data-source/hokkaido_map_web_4612.geojson",
+  "stationsSource": "/Users/Jared/Projects/mobile-app/apps/hokkaido-rural-magnets/assets/hokkaido-countries.json",
+  "featureCount": 179,
+  "excludedCityNames": [
+    "歯舞群島",
+    "色丹島",
+    "国後島",
+    "択捉島"
+  ],
+  "sapporoMode": "city",
+  "note": "Source GeoJSON already uses 札幌市 as a single municipality polygon."
+}

@@ -1,0 +1,3 @@
+# Force EAS to run prebuild instead of uploading stale local native projects.
+/ios
+/android

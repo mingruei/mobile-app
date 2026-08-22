@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-08-21T05:21:10.002Z",
+  "source": "/Users/Jared/Projects/mobile-app/apps/hokkaido-rural-magnets/data-source/localgovjp-hokkaido.json",
+  "englishNameSource": "/Users/Jared/Projects/mobile-app/apps/hokkaido-rural-magnets/data-source/open-data-jp-municipalities.json",
+  "descriptionZhSource": "/Users/Jared/Projects/mobile-app/apps/hokkaido-rural-magnets/data-source/hokkaido-municipality-descriptions-zh.json",
+  "nameZhSource": "/Users/Jared/Projects/mobile-app/apps/hokkaido-rural-magnets/data-source/hokkaido-municipality-names-zh.json",
+  "municipalityCount": 179,
+  "areaCounts": {
+    "道北": 41,
+    "道央": 70,
+    "道東": 50,
+    "道南": 18
+  }
+}

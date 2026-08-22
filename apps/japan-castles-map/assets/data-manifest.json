@@ -1,0 +1,13 @@
+{
+  "version": 5,
+  "updatedAt": "2026-08-21T011:26:00.000Z",
+  "files": {
+    "castles": {
+      "path": "castles.json"
+    },
+    "content": {
+      "path": "castle-content.zh-Hant.json",
+      "locale": "zh-Hant"
+    }
+  }
+}

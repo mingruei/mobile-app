@@ -1,0 +1,58 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { File, Paths } from 'expo-file-system';
+
+import type { StationProgressMap } from '../types/stationProgress';
+import { normalizeProgressMap } from './mergeProgressMap';
+
+const LEGACY_ASYNC_STORAGE_KEY = 'station-progress-v1';
+const PROGRESS_FILE_NAME = 'station-progress-v1.json';
+
+function getProgressFile(): File {
+  return new File(Paths.document, PROGRESS_FILE_NAME);
+}
+
+async function loadFromDocumentFile(): Promise<StationProgressMap | null> {
+  const file = getProgressFile();
+
+  if (!file.exists) {
+    return null;
+  }
+
+  const raw = await file.text();
+  return normalizeProgressMap(JSON.parse(raw));
+}
+
+async function migrateFromAsyncStorage(): Promise<StationProgressMap> {
+  const legacy = await AsyncStorage.getItem(LEGACY_ASYNC_STORAGE_KEY);
+  if (!legacy) {
+    return {};
+  }
+
+  const map = normalizeProgressMap(JSON.parse(legacy));
+  await saveProgressMap(map);
+  await AsyncStorage.removeItem(LEGACY_ASYNC_STORAGE_KEY);
+  return map;
+}
+
+export async function loadProgressMap(): Promise<StationProgressMap> {
+  try {
+    const fromFile = await loadFromDocumentFile();
+    if (fromFile) {
+      return fromFile;
+    }
+
+    return await migrateFromAsyncStorage();
+  } catch {
+    try {
+      return await migrateFromAsyncStorage();
+    } catch {
+      return {};
+    }
+  }
+}
+
+export async function saveProgressMap(map: StationProgressMap): Promise<void> {
+  const payload = JSON.stringify(map);
+
+  getProgressFile().write(payload);
+}

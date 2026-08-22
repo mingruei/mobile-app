@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-08-13T09:24:18.301Z",
+  "source": "/Users/Jared/Projects/michi-no-eki-magnets/data-source/linkdata-roadside-station.csv",
+  "format": "csv",
+  "stationCount": 1200,
+  "skippedCount": 25,
+  "skippedByReason": {
+    "status:廃止": 4,
+    "missing-core-fields": 7,
+    "missing-coordinates": 13,
+    "status:empty": 1
+  },
+  "attribution": "「国土数値情報（道の駅データ）」（国土交通省）をもとに東京福祉専門学校IT医療ソーシャルワーカー科作成（LinkData rdf1s2861i）"
+}

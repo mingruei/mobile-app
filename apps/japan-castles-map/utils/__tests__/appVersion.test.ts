@@ -48,7 +48,7 @@ describe('getAppVersionInfo', () => {
 
     expect(getAppVersionInfo()).toEqual({
       version: '1.4.3',
-      build: '56',
+      build: '57',
     });
   });
 

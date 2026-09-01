@@ -45,6 +45,7 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
   const {
     version: castleDataVersion,
     updatedAt: castleDataUpdatedAt,
+    releaseNotes: castleDataReleaseNotes,
     source: castleDataSource,
     bundledVersion,
     remoteSyncConfigured,
@@ -413,10 +414,48 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
         <TipJarSection />
 
         <View style={styles.card}>
+          <Text style={styles.sectionTitle}>{t('settings.feedback')}</Text>
+          <Text style={styles.rowHint}>{t('settings.feedbackHint')}</Text>
+          <Pressable
+            accessibilityRole="link"
+            onPress={() => void handleFeedbackEmailPress()}
+            style={styles.feedbackLink}
+          >
+            <Text style={styles.feedbackEmail}>{FEEDBACK_EMAIL}</Text>
+          </Pressable>
+          {feedbackMessage ? <Text style={styles.successText}>{feedbackMessage}</Text> : null}
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.sectionTitle}>{t('settings.version')}</Text>
+          <Text style={styles.versionValue}>
+            {t('settings.versionValue', {
+              version: appVersion.version,
+              build: appVersion.build,
+            })}
+          </Text>
+        </View>
+
+        <View style={styles.card}>
           <Text style={styles.sectionTitle}>{t('settings.castleData')}</Text>
           <Text style={styles.rowHint}>{t('settings.castleDataHint')}</Text>
+
+          <View style={styles.releaseNotesSection}>
+            <Text style={styles.releaseNotesTitle}>{t('settings.castleDataReleaseNotes')}</Text>
+            {castleDataReleaseNotes.length > 0 ? (
+              castleDataReleaseNotes.map((note) => (
+                <Text key={note} style={styles.releaseNoteItem}>
+                  {'• '}
+                  {note}
+                </Text>
+              ))
+            ) : (
+              <Text style={styles.rowHint}>{t('settings.castleDataReleaseNotesEmpty')}</Text>
+            )}
+          </View>
+
           {castleDataReady ? (
-            <>
+            <View style={styles.castleDataMetaSection}>
               <Text style={styles.versionValue}>
                 {t('settings.castleDataVersionValue', {
                   version: castleDataVersion,
@@ -438,33 +477,10 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
                   ? t('settings.castleDataRemoteSyncEnabled')
                   : t('settings.castleDataRemoteSyncDisabled')}
               </Text>
-            </>
+            </View>
           ) : (
             <ActivityIndicator size="small" color={colors.original} />
           )}
-        </View>
-
-        <View style={styles.card}>
-          <Text style={styles.sectionTitle}>{t('settings.feedback')}</Text>
-          <Text style={styles.rowHint}>{t('settings.feedbackHint')}</Text>
-          <Pressable
-            accessibilityRole="link"
-            onPress={() => void handleFeedbackEmailPress()}
-            style={styles.feedbackLink}
-          >
-            <Text style={styles.feedbackEmail}>{FEEDBACK_EMAIL}</Text>
-          </Pressable>
-          {feedbackMessage ? <Text style={styles.successText}>{feedbackMessage}</Text> : null}
-        </View>
-
-        <View style={styles.card}>
-          <Text style={styles.sectionTitle}>{t('settings.version')}</Text>
-          <Text style={styles.versionValue}>
-            {t('settings.versionValue', {
-              version: appVersion.version,
-              build: appVersion.build,
-            })}
-          </Text>
         </View>
       </ScrollView>
     </View>
@@ -669,6 +685,26 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
     color: colors.text,
+  },
+  releaseNotesSection: {
+    gap: 6,
+    paddingTop: 4,
+  },
+  releaseNotesTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: colors.text,
+  },
+  releaseNoteItem: {
+    fontSize: 13,
+    color: colors.textMuted,
+    lineHeight: 20,
+  },
+  castleDataMetaSection: {
+    gap: 6,
+    paddingTop: 8,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: colors.border,
   },
   feedbackLink: {
     alignSelf: 'flex-start',

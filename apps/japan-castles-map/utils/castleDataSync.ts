@@ -3,6 +3,7 @@ import bundledManifest from '../assets/data-manifest.json';
 import bundledCastleContentZhHant from '../assets/i18n/castle-content.zh-Hant.json';
 import type { Castle } from '../types/castle';
 import type { CastleDataBundle, CastleDataManifest } from '../types/castleDataManifest';
+import { normalizeReleaseNotes } from '../types/castleDataManifest';
 import { getCastleDataStorageBaseUrl } from './castleDataConfig';
 import {
   loadCachedCastleDataBundle,
@@ -28,6 +29,7 @@ function createBundledCastleDataBundle(): CastleDataBundle {
   return {
     version: bundledManifest.version,
     updatedAt: bundledManifest.updatedAt,
+    releaseNotes: normalizeReleaseNotes(bundledManifest.releaseNotes),
     castles: bundledCastles as Castle[],
     contentByLocale: {
       'zh-Hant': bundledCastleContentZhHant as Record<string, unknown>,
@@ -139,6 +141,7 @@ export async function syncRemoteCastleDataBundle(
   const bundle: CastleDataBundle = {
     version: manifest.version,
     updatedAt: manifest.updatedAt,
+    releaseNotes: normalizeReleaseNotes(manifest.releaseNotes),
     castles,
     contentByLocale: {
       [contentLocale]: content,

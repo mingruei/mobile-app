@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 import { setCastleContentForLocale, type CastleContentOverlay } from '../i18n/castleContent';
 import type { Castle } from '../types/castle';
@@ -17,10 +17,13 @@ type CastleDataContextValue = {
   revision: number;
   version: number;
   updatedAt: string;
+  releaseNotes: string[];
   source: CastleDataSource;
   bundledVersion: number;
   remoteSyncConfigured: boolean;
   ready: boolean;
+  showUpdateNotice: boolean;
+  dismissUpdateNotice: () => void;
 };
 
 const CastleDataContext = createContext<CastleDataContextValue | null>(null);
@@ -39,10 +42,16 @@ export function CastleDataProvider({ children }: { children: ReactNode }) {
   const [castles, setCastles] = useState<readonly Castle[]>(bundled.castles);
   const [version, setVersion] = useState(bundled.version);
   const [updatedAt, setUpdatedAt] = useState(bundled.updatedAt);
+  const [releaseNotes, setReleaseNotes] = useState(bundled.releaseNotes);
   const [source, setSource] = useState<CastleDataSource>('bundled');
   const [revision, setRevision] = useState(0);
   const [ready, setReady] = useState(false);
+  const [showUpdateNotice, setShowUpdateNotice] = useState(false);
   const remoteSyncConfigured = isCastleDataRemoteSyncConfigured();
+
+  const dismissUpdateNotice = useCallback(() => {
+    setShowUpdateNotice(false);
+  }, []);
 
   useEffect(() => {
     applyCastleDataBundle(bundled);
@@ -61,6 +70,7 @@ export function CastleDataProvider({ children }: { children: ReactNode }) {
       setCastles(initial.castles);
       setVersion(initial.version);
       setUpdatedAt(initial.updatedAt);
+      setReleaseNotes(initial.releaseNotes);
       setSource(initial.source);
       setRevision((current) => current + 1);
       setReady(true);
@@ -74,8 +84,10 @@ export function CastleDataProvider({ children }: { children: ReactNode }) {
       setCastles(synced.castles);
       setVersion(synced.version);
       setUpdatedAt(synced.updatedAt);
+      setReleaseNotes(synced.releaseNotes);
       setSource('remote');
       setRevision((current) => current + 1);
+      setShowUpdateNotice(true);
     })();
 
     return () => {
@@ -89,12 +101,26 @@ export function CastleDataProvider({ children }: { children: ReactNode }) {
       revision,
       version,
       updatedAt,
+      releaseNotes,
       source,
       bundledVersion: BUNDLED_CASTLE_DATA_VERSION,
       remoteSyncConfigured,
       ready,
+      showUpdateNotice,
+      dismissUpdateNotice,
     }),
-    [castles, ready, remoteSyncConfigured, revision, source, updatedAt, version],
+    [
+      castles,
+      dismissUpdateNotice,
+      ready,
+      releaseNotes,
+      remoteSyncConfigured,
+      revision,
+      showUpdateNotice,
+      source,
+      updatedAt,
+      version,
+    ],
   );
 
   return <CastleDataContext.Provider value={value}>{children}</CastleDataContext.Provider>;

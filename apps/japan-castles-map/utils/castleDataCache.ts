@@ -2,6 +2,7 @@ import { File, Paths } from 'expo-file-system';
 
 import type { Castle } from '../types/castle';
 import type { CastleDataBundle, CastleDataManifest } from '../types/castleDataManifest';
+import { normalizeReleaseNotes } from '../types/castleDataManifest';
 
 const MANIFEST_FILE_NAME = 'castle-data-manifest.json';
 const CASTLES_FILE_NAME = 'castle-data-castles.json';
@@ -65,6 +66,7 @@ export async function loadCachedCastleDataBundle(): Promise<CastleDataBundle | n
     return {
       version: manifest.version,
       updatedAt: manifest.updatedAt,
+      releaseNotes: normalizeReleaseNotes(manifest.releaseNotes),
       castles,
       contentByLocale: {
         [contentLocale]: content,

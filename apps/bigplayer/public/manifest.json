@@ -1,0 +1,22 @@
+{
+  "name": "大字播",
+  "short_name": "大字播",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F5FA0",
+  "theme_color": "#0F5FA0",
+  "lang": "zh-Hant",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

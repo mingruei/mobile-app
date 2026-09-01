@@ -109,6 +109,9 @@ export type TranslationDictionary = {
     castleDataSourceRemote: string;
     castleDataRemoteSyncEnabled: string;
     castleDataRemoteSyncDisabled: string;
+    castleDataUpdatedNotice: string;
+    castleDataReleaseNotes: string;
+    castleDataReleaseNotesEmpty: string;
     tipJarTitle: string;
     tipJarHint: string;
     tipJarButtonFallback: string;

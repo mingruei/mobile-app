@@ -1,0 +1,8 @@
+{
+  "name": "exit-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Exit the BigPlayer app",
+  "main": "index.ts",
+  "license": "UNLICENSED"
+}

@@ -1,6 +1,10 @@
 {
   "version": 5,
-  "updatedAt": "2026-08-21T011:26:00.000Z",
+  "updatedAt": "2026-08-21T01:26:00.000Z",
+  "releaseNotes": [
+    "修正名城說明與御城印相關用語（繁體中文）",
+    "更新部分名城的章印販售時間資訊"
+  ],
   "files": {
     "castles": {
       "path": "castles.json"

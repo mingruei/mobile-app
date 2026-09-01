@@ -4,6 +4,7 @@ import { BUNDLED_CASTLE_DATA_VERSION } from '../../castleDataSync';
 export const REMOTE_MANIFEST: CastleDataManifest = {
   version: BUNDLED_CASTLE_DATA_VERSION + 1,
   updatedAt: '2026-08-09T12:00:00.000Z',
+  releaseNotes: ['Remote release note'],
   files: {
     castles: { path: 'castles.json' },
     content: { path: 'castle-content.zh-Hant.json', locale: 'zh-Hant' },

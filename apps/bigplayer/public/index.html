@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="大字播" />
+    <meta name="theme-color" content="#0F5FA0" />
+    <title>大字播</title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="player">
+      <section class="lcd" aria-live="polite">
+        <p id="song-title" class="song-title">還沒有歌曲</p>
+        <p id="song-meta" class="song-meta">等候歌曲</p>
+        <div class="progress-track" aria-hidden="true">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <p id="clock" class="clock">0:00 / 0:00</p>
+      </section>
+
+      <p id="status" class="status">打開就會接著播放</p>
+
+      <section class="controls" aria-label="播放控制">
+        <div class="row pair">
+          <button type="button" class="btn btn-blue" id="btn-prev">上一首</button>
+          <button type="button" class="btn btn-blue" id="btn-next">下一首</button>
+        </div>
+        <div class="row volume" id="volume-row">
+          <button type="button" class="btn btn-purple" id="btn-vol-down">小聲</button>
+          <p id="volume-label" class="volume-label">80%</p>
+          <button type="button" class="btn btn-purple" id="btn-vol-up">大聲</button>
+        </div>
+        <button type="button" class="btn btn-red" id="btn-close">關閉</button>
+      </section>
+
+      <section class="help hidden" id="help">
+        <p id="phone-url" class="phone-url hidden"></p>
+      </section>
+    </main>
+
+    <div id="start-overlay" class="overlay overlay-start hidden">
+      <button type="button" class="btn btn-green overlay-btn" id="btn-start">
+        開始播放
+      </button>
+      <p>請按一次這個大按鈕</p>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

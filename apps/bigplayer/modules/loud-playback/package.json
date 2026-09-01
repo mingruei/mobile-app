@@ -1,0 +1,8 @@
+{
+  "name": "loud-playback",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Play audio louder than the source file",
+  "main": "index.ts",
+  "license": "UNLICENSED"
+}

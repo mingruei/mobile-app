@@ -27,7 +27,14 @@
     "castles:android": "npm run android -w japan-castles-map",
     "castles:build:android:local": "npm run build:android:local -w japan-castles-map",
     "castles:build:ios": "npm run build:ios -w japan-castles-map",
-    "castles:build:android": "npm run build:android -w japan-castles-map"
+    "castles:build:android": "npm run build:android -w japan-castles-map",
+    "bigplayer:start": "npm run start -w bigplayer",
+    "bigplayer:test": "npm test -w bigplayer",
+    "bigplayer:ios": "npm run ios -w bigplayer",
+    "bigplayer:xcode": "npm run ios:xcode -w bigplayer",
+    "bigplayer:build:ios": "npm run build:ios -w bigplayer",
+    "bigplayer:submit:ios": "npm run submit:ios -w bigplayer",
+    "bigplayer:start:app": "npm run start:app -w bigplayer"
   },
   "devDependencies": {
     "react-test-renderer": "19.1.0"

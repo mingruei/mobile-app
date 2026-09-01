@@ -1,0 +1,51 @@
+{
+  "name": "bigplayer",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.ts",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "start:app": "expo start",
+    "ios": "LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 expo run:ios --device --configuration Release",
+    "ios:xcode": "LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 EAS_BUILD_PROFILE=production expo prebuild --platform ios && open ios/BigPlayer.xcworkspace",
+    "prebuild:ios": "LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 expo prebuild --platform ios",
+    "build:ios": "eas build --platform ios --profile production",
+    "submit:ios": "eas submit --platform ios --profile production",
+    "test": "node --test __tests__/*.test.mjs",
+    "android": "expo run:android"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "^54.0.0",
+    "expo-av": "~16.0.8",
+    "expo-build-properties": "~1.0.10",
+    "expo-file-system": "~19.0.24",
+    "expo-keep-awake": "~15.0.8",
+    "expo-linking": "~8.0.12",
+    "expo-splash-screen": "~31.0.13",
+    "expo-status-bar": "~3.0.9",
+    "react": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-safe-area-context": "~5.6.0",
+    "exit-app": "file:./modules/exit-app",
+    "loud-playback": "file:./modules/loud-playback"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "typescript": "~5.9.2"
+  },
+  "expo": {
+    "autolinking": {
+      "nativeModulesDir": "./modules",
+      "exclude": [
+        "expo-dev-client",
+        "expo-dev-launcher",
+        "expo-dev-menu",
+        "expo-dev-menu-interface"
+      ]
+    }
+  }
+}

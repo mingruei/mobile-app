@@ -3,6 +3,7 @@ import { ActivityIndicator, InteractionManager, Pressable, StyleSheet, Text, Vie
 import { SafeAreaProvider, SafeAreaView, initialWindowMetrics } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { CollectibleUploadSourceModal } from './components/CollectibleUploadSourceModal';
+import { CastleDataUpdateNotice } from './components/CastleDataUpdateNotice';
 import { GlobalCollectibleUploadFab } from './components/GlobalCollectibleUploadFab';
 import { CastleDetailScreen } from './components/CastleDetailScreen';
 import { BrowseListHeader } from './components/BrowseListHeader';
@@ -12,7 +13,7 @@ import type { RegionId } from './constants/regions';
 import { colors } from './constants/theme';
 import { MapProviderProvider } from './hooks/useMapProvider';
 import { CastleGroupsProvider, useCastleGroups } from './hooks/useCastleGroups';
-import { CastleDataProvider, useCastles } from './hooks/useCastleData';
+import { CastleDataProvider, useCastles, useCastleData } from './hooks/useCastleData';
 import { CastleProgressProvider, useCastleProgress } from './hooks/useCastleProgress';
 import { useConditionalPortraitLock } from './hooks/useConditionalPortraitLock';
 import { I18nProvider, useI18n } from './i18n';
@@ -44,6 +45,7 @@ type DetailUploadPickerState = {
 function AppContent() {
   const { t, getPrefectureLabel } = useI18n();
   const castles = useCastles();
+  const { showUpdateNotice, dismissUpdateNotice } = useCastleData();
   const { progressMap } = useCastleProgress();
   const { groups } = useCastleGroups();
   useConditionalPortraitLock();
@@ -406,6 +408,12 @@ function AppContent() {
         }
         onClose={() => setDetailUploadPicker(null)}
         onSelect={(source) => void handleDetailUploadSelect(source)}
+      />
+
+      <CastleDataUpdateNotice
+        visible={showUpdateNotice}
+        message={t('settings.castleDataUpdatedNotice')}
+        onDismiss={dismissUpdateNotice}
       />
     </SafeAreaView>
   );

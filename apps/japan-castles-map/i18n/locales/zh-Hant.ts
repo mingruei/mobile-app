@@ -115,6 +115,9 @@ export const zhHant: TranslationDictionary = {
     castleDataSourceRemote: 'Supabase 更新',
     castleDataRemoteSyncEnabled: '遠端同步：已啟用',
     castleDataRemoteSyncDisabled: '遠端同步：未設定（僅使用 App 內建資料）',
+    castleDataUpdatedNotice: '名城資料已更新',
+    castleDataReleaseNotes: '更新內容',
+    castleDataReleaseNotesEmpty: '此版本尚無更新說明。',
     tipJarTitle: '贊助開發者',
     tipJarHint:
       '若你喜歡這個 App，可以請開發者喝半杯咖啡。此為自願性贊助，不會解鎖任何功能。',

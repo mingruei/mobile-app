@@ -61,6 +61,7 @@ describe('castleDataSync', () => {
     const cached: CastleDataBundle = {
       version: BUNDLED_CASTLE_DATA_VERSION + 1,
       updatedAt: '2026-08-09T00:00:00.000Z',
+      releaseNotes: ['Cached note'],
       castles: [{ id: 99, number: 99, name: 'Cached', series: 'original', seriesLabel: '日本100名城', prefecture: '東京都', city: '千代田区', location: '東京都', latitude: 1, longitude: 2 }] as Castle[],
       contentByLocale: {
         'zh-Hant': { '99': { subtitle: 'Cached' } },
@@ -93,6 +94,7 @@ describe('castleDataSync', () => {
     expect(bundle).toEqual({
       version: REMOTE_MANIFEST.version,
       updatedAt: REMOTE_MANIFEST.updatedAt,
+      releaseNotes: REMOTE_MANIFEST.releaseNotes,
       castles: REMOTE_CASTLES,
       contentByLocale: {
         'zh-Hant': REMOTE_CONTENT,

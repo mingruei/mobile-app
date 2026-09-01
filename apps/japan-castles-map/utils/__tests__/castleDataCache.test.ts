@@ -44,6 +44,7 @@ const CONTENT_FILE = 'castle-data-content.zh-Hant.json';
 const manifest: CastleDataManifest = {
   version: 5,
   updatedAt: '2026-08-10T00:00:00.000Z',
+  releaseNotes: ['Cached release note'],
   files: {
     castles: { path: 'castles.json' },
     content: { path: 'castle-content.zh-Hant.json', locale: 'zh-Hant' },
@@ -134,6 +135,7 @@ describe('castleDataCache', () => {
     await expect(loadCachedCastleDataBundle()).resolves.toEqual({
       version: 5,
       updatedAt: '2026-08-10T00:00:00.000Z',
+      releaseNotes: ['Cached release note'],
       castles,
       contentByLocale: {
         'zh-Hant': content,
@@ -145,6 +147,7 @@ describe('castleDataCache', () => {
     const bundle: CastleDataBundle = {
       version: 5,
       updatedAt: '2026-08-10T00:00:00.000Z',
+      releaseNotes: ['Cached release note'],
       castles,
       contentByLocale: {
         'zh-Hant': content,
@@ -162,6 +165,7 @@ describe('castleDataCache', () => {
     const bundle: CastleDataBundle = {
       version: 5,
       updatedAt: '2026-08-10T00:00:00.000Z',
+      releaseNotes: [],
       castles,
       contentByLocale: {},
     };

@@ -22,9 +22,14 @@ const contentSize = readFileSync(contentPath).byteLength;
 const previousManifest = readJson(manifestPath);
 const previousVersion = typeof previousManifest.version === 'number' ? previousManifest.version : 0;
 
+const previousReleaseNotes = Array.isArray(previousManifest.releaseNotes)
+  ? previousManifest.releaseNotes.filter((item) => typeof item === 'string' && item.trim().length > 0)
+  : [];
+
 const manifest = {
   version: previousVersion,
   updatedAt: new Date().toISOString(),
+  releaseNotes: previousReleaseNotes,
   files: {
     castles: {
       path: 'castles.json',

@@ -1,4 +1,12 @@
 jest.mock('@expo/config-plugins', () => ({
+  AndroidConfig: {
+    Permissions: {
+      withBlockedPermissions: jest.fn((config, permissions) => ({
+        ...config,
+        blockedPermissions: permissions,
+      })),
+    },
+  },
   withInfoPlist: jest.fn((config, callback) => {
     callback({ modResults: {} });
     return config;
@@ -34,11 +42,19 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const { withAppBuildGradle, withInfoPlist, withXcodeProject } = require('@expo/config-plugins');
+const {
+  AndroidConfig,
+  withAppBuildGradle,
+  withDangerousMod,
+  withInfoPlist,
+  withXcodeProject,
+} = require('@expo/config-plugins');
 const permissionMessages = require('../permissionMessages');
+const withAndroidPlayMediaCompliance = require('../withAndroidPlayMediaCompliance');
 const withAndroidReleaseFileName = require('../withAndroidReleaseFileName');
 const withAndroidReleaseSigning = require('../withAndroidReleaseSigning');
 const withFmtXcode26Fix = require('../withFmtXcode26Fix');
+const withIosSceneLifecycle = require('../withIosSceneLifecycle');
 const withIosUsageDescriptions = require('../withIosUsageDescriptions');
 const withHermesDsym = require('../withHermesDsym');
 
@@ -320,6 +336,82 @@ ${marked}`,
     expect(dedupeResult.modResults.contents).toContain(
       '// @generated begin android-release-signing-from-keystore-properties',
     );
+  });
+});
+
+describe('withAndroidPlayMediaCompliance', () => {
+  it('blocks broad media storage permissions via Expo helper', () => {
+    const result = withAndroidPlayMediaCompliance({ name: 'test', slug: 'test' });
+
+    expect(AndroidConfig.Permissions.withBlockedPermissions).toHaveBeenCalledWith(
+      { name: 'test', slug: 'test' },
+      expect.arrayContaining([
+        'android.permission.READ_MEDIA_IMAGES',
+        'android.permission.READ_EXTERNAL_STORAGE',
+        'android.permission.WRITE_EXTERNAL_STORAGE',
+      ]),
+    );
+    expect(result.blockedPermissions).toEqual(
+      expect.arrayContaining(['android.permission.READ_MEDIA_IMAGES']),
+    );
+  });
+});
+
+describe('withIosSceneLifecycle', () => {
+  it('patches AppDelegate for UIScene lifecycle and SceneDelegate', async () => {
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'scene-lifecycle-'));
+    const appDir = path.join(tempDir, 'michi');
+    fs.mkdirSync(appDir);
+    const appDelegatePath = path.join(appDir, 'AppDelegate.swift');
+    fs.writeFileSync(
+      appDelegatePath,
+      [
+        'import ReactAppDependencyProvider',
+        'class AppDelegate: ExpoAppDelegate {',
+        '  var reactNativeFactory: RCTReactNativeFactory?',
+        '  public override func application(',
+        '    _ application: UIApplication,',
+        '    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil',
+        '  ) -> Bool {',
+        '#if os(iOS) || os(tvOS)',
+        '    window = UIWindow(frame: UIScreen.main.bounds)',
+        '    factory.startReactNative(',
+        '      withModuleName: "main",',
+        '      in: window,',
+        '      launchOptions: launchOptions)',
+        '#endif',
+        '    return super.application(application, didFinishLaunchingWithOptions: launchOptions)',
+        '  }',
+        '}',
+        '',
+      ].join('\n'),
+    );
+
+    await withIosSceneLifecycle({
+      name: 'test',
+      slug: 'test',
+      modRequest: { platformProjectRoot: tempDir },
+    });
+
+    expect(withDangerousMod).toHaveBeenCalled();
+    const updated = fs.readFileSync(appDelegatePath, 'utf8');
+    expect(updated).toContain('var launchOptions:');
+    expect(updated).toContain('self.launchOptions = launchOptions');
+    expect(updated).toContain('class SceneDelegate');
+    expect(updated).toContain('canImport(EXDevLauncher)');
+    expect(updated).not.toContain('window = UIWindow(frame: UIScreen.main.bounds)');
+  });
+
+  it('throws when AppDelegate.swift cannot be found uniquely', async () => {
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'scene-lifecycle-missing-'));
+
+    await expect(
+      withIosSceneLifecycle({
+        name: 'test',
+        slug: 'test',
+        modRequest: { platformProjectRoot: tempDir },
+      }),
+    ).rejects.toThrow('Failed to find AppDelegate.swift for the UIScene lifecycle.');
   });
 });
 

@@ -7,7 +7,7 @@ on:
 
 jobs:
   japan-castles-map:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: apps/japan-castles-map
@@ -27,7 +27,7 @@ jobs:
       - run: npx tsc --noEmit
 
   michi-no-eki-magnets:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: apps/michi-no-eki-magnets
@@ -47,7 +47,7 @@ jobs:
       - run: npx tsc --noEmit
 
   hokkaido-rural-magnets:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: apps/hokkaido-rural-magnets

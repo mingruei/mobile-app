@@ -59,8 +59,7 @@
     "build:stations": "node scripts/build-stations-from-linkdata.mjs --csv && node scripts/generate-station-data-manifest.mjs",
     "build:stations:offline": "node scripts/build-stations-from-linkdata.mjs --offline --csv && node scripts/generate-station-data-manifest.mjs",
     "prebuild:ios": "expo prebuild --platform ios",
-    "prebuild:android": "expo prebuild --platform android",
-    "postinstall": "patch-package"
+    "prebuild:android": "expo prebuild --platform android"
   },
   "private": true
 }

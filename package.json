@@ -5,6 +5,7 @@
     "apps/*"
   ],
   "scripts": {
+    "postinstall": "patch-package",
     "michi:start": "npm run start -w michi-no-eki-magnets",
     "michi:test": "npm test -w michi-no-eki-magnets",
     "michi:tsc": "npm exec -w michi-no-eki-magnets -- tsc --noEmit",
@@ -45,6 +46,7 @@
     "podcast:ios": "npm run ios -w my-podcast"
   },
   "devDependencies": {
+    "patch-package": "^8.0.1",
     "react-test-renderer": "19.1.0"
   }
 }

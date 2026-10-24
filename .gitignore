@@ -17,6 +17,9 @@ coverage/
 # Native (generated per app)
 ios/
 android/
+# Keep Expo module native sources (apps/*/modules/*/ios)
+!apps/*/modules/*/ios/
+!apps/*/modules/*/ios/**
 
 # debug
 npm-debug.*

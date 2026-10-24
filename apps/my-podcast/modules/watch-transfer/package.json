@@ -1,0 +1,8 @@
+{
+  "name": "watch-transfer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Send a saved podcast episode to Apple Watch",
+  "main": "index.ts",
+  "license": "UNLICENSED"
+}

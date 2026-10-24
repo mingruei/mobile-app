@@ -34,7 +34,15 @@
     "bigplayer:xcode": "npm run ios:xcode -w bigplayer",
     "bigplayer:build:ios": "npm run build:ios -w bigplayer",
     "bigplayer:submit:ios": "npm run submit:ios -w bigplayer",
-    "bigplayer:start:app": "npm run start:app -w bigplayer"
+    "bigplayer:start:app": "npm run start:app -w bigplayer",
+    "alarm:start": "npm run start -w easy-alarm",
+    "alarm:test": "npm test -w easy-alarm",
+    "alarm:tsc": "npm exec -w easy-alarm -- tsc --noEmit",
+    "alarm:ios": "npm run ios -w easy-alarm",
+    "podcast:start": "npm run start -w my-podcast",
+    "podcast:test": "npm test -w my-podcast",
+    "podcast:tsc": "npm exec -w my-podcast -- tsc --noEmit",
+    "podcast:ios": "npm run ios -w my-podcast"
   },
   "devDependencies": {
     "react-test-renderer": "19.1.0"

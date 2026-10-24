@@ -12,7 +12,7 @@ const isProductionBuild = process.env.EAS_BUILD_PROFILE === 'production';
 const config: ExpoConfig = {
   name: '日本道之駅磁鐵收集帳',
   slug: 'michi-no-eki-magnets',
-  version: '1.0.1',
+  version: '1.1.0',
   orientation: 'default',
   icon: './assets/icon.png',
   userInterfaceStyle: 'light',
@@ -54,10 +54,12 @@ const config: ExpoConfig = {
       },
     ],
     './plugins/withFmtXcode26Fix.js',
+    './plugins/withIosSceneLifecycle.js',
     './plugins/withIosUsageDescriptions.js',
     './plugins/withHermesDsym.js',
     './plugins/withAndroidReleaseFileName.js',
     './plugins/withAndroidReleaseSigning.js',
+    './plugins/withAndroidPlayMediaCompliance.js',
     'expo-iap',
   ],
   extra: {
@@ -68,7 +70,7 @@ const config: ExpoConfig = {
   ios: {
     supportsTablet: true,
     bundleIdentifier: 'com.michinoeki.magnets',
-    buildNumber: '9',
+    buildNumber: '16',
     infoPlist: {
       NSLocationWhenInUseUsageDescription: permissionMessages.location,
       NSLocationAlwaysUsageDescription: permissionMessages.location,
@@ -77,11 +79,22 @@ const config: ExpoConfig = {
       NSCameraUsageDescription: permissionMessages.camera,
       LSApplicationQueriesSchemes: ['comgooglemaps', 'comgooglemapsurl', 'mailto'],
       ITSAppUsesNonExemptEncryption: false,
+      UIApplicationSceneManifest: {
+        UIApplicationSupportsMultipleScenes: false,
+        UISceneConfigurations: {
+          UIWindowSceneSessionRoleApplication: [
+            {
+              UISceneConfigurationName: 'Default Configuration',
+              UISceneDelegateClassName: '$(PRODUCT_MODULE_NAME).SceneDelegate',
+            },
+          ],
+        },
+      },
     },
   },
   android: {
     package: 'com.michinoeki.magnets',
-    versionCode: 9,
+    versionCode: 15,
     allowBackup: true,
     edgeToEdgeEnabled: true,
     softwareKeyboardLayoutMode: 'resize',
@@ -89,8 +102,14 @@ const config: ExpoConfig = {
       'ACCESS_COARSE_LOCATION',
       'ACCESS_FINE_LOCATION',
       'CAMERA',
-      'READ_MEDIA_IMAGES',
-      'READ_EXTERNAL_STORAGE',
+    ],
+    blockedPermissions: [
+      'android.permission.READ_MEDIA_IMAGES',
+      'android.permission.READ_MEDIA_VIDEO',
+      'android.permission.READ_MEDIA_AUDIO',
+      'android.permission.READ_MEDIA_VISUAL_USER_SELECTED',
+      'android.permission.READ_EXTERNAL_STORAGE',
+      'android.permission.WRITE_EXTERNAL_STORAGE',
     ],
     adaptiveIcon: {
       backgroundColor: '#FAF5E1',

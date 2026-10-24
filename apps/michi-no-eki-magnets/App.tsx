@@ -31,9 +31,12 @@ const SettingsScreen = lazy(() =>
 const GroupsScreen = lazy(() =>
   import('./components/GroupsScreen').then((module) => ({ default: module.GroupsScreen })),
 );
+const RoutePlanScreen = lazy(() =>
+  import('./components/RoutePlanScreen').then((module) => ({ default: module.RoutePlanScreen })),
+);
 
 type MainScreen = 'browse' | 'map';
-type Screen = MainScreen | 'detail' | 'settings' | 'groups';
+type Screen = MainScreen | 'detail' | 'settings' | 'groups' | 'route';
 
 type DetailUploadPickerState = {
   stationId: number;
@@ -230,7 +233,8 @@ function AppContent() {
   const isDetailOpen = screen === 'detail' && selectedStation !== null;
   const isSettingsOpen = screen === 'settings';
   const isGroupsOpen = screen === 'groups';
-  const isOverlayOpen = isDetailOpen || isSettingsOpen || isGroupsOpen;
+  const isRouteOpen = screen === 'route';
+  const isOverlayOpen = isDetailOpen || isSettingsOpen || isGroupsOpen || isRouteOpen;
   const activeMainScreen: MainScreen =
     screen === 'browse' || screen === 'map' ? screen : returnScreen;
 
@@ -246,11 +250,21 @@ function AppContent() {
     setSelectedStation(null);
   };
 
+  const openRoutePlan = () => {
+    setReturnScreen(activeMainScreen);
+    setScreen('route');
+    setSelectedStation(null);
+  };
+
   const handleBackFromSettings = () => {
     setScreen(returnScreen);
   };
 
   const handleBackFromGroups = () => {
+    setScreen(returnScreen);
+  };
+
+  const handleBackFromRoutePlan = () => {
     setScreen(returnScreen);
   };
 
@@ -285,6 +299,9 @@ function AppContent() {
                   >
                     {t('screen.map')}
                   </Text>
+                </Pressable>
+                <Pressable accessibilityRole="button" onPress={openRoutePlan} style={styles.headerButton}>
+                  <Text style={styles.headerButtonLabel}>{t('screen.route')}</Text>
                 </Pressable>
                 <Pressable accessibilityRole="button" onPress={openGroups} style={styles.headerButton}>
                   <Text style={styles.headerButtonLabel}>{t('screen.group')}</Text>
@@ -362,6 +379,20 @@ function AppContent() {
               }
             >
               <GroupsScreen stations={stations} onBack={handleBackFromGroups} />
+            </Suspense>
+          </SafeAreaView>
+        ) : null}
+
+        {isRouteOpen ? (
+          <SafeAreaView style={styles.detailLayer} edges={['top', 'left', 'right', 'bottom']}>
+            <Suspense
+              fallback={
+                <View style={styles.settingsLoading}>
+                  <ActivityIndicator size="large" color={colors.original} />
+                </View>
+              }
+            >
+              <RoutePlanScreen onBack={handleBackFromRoutePlan} />
             </Suspense>
           </SafeAreaView>
         ) : null}

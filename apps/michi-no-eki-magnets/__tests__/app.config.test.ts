@@ -2,9 +2,32 @@ import config from '../app.config';
 
 describe('app.config', () => {
   it('defines user-facing and Android version metadata', () => {
-    expect(config.version).toBe('1.0.1');
-    expect(config.ios?.buildNumber).toBe('9');
-    expect(config.android?.versionCode).toBe(9);
+    expect(config.version).toBe('1.1.0');
+    expect(config.ios?.buildNumber).toBe('16');
+    expect(config.android?.versionCode).toBe(15);
+  });
+
+  it('blocks broad Android media storage permissions for Play policy compliance', () => {
+    expect(config.android?.permissions).toEqual([
+      'ACCESS_COARSE_LOCATION',
+      'ACCESS_FINE_LOCATION',
+      'CAMERA',
+    ]);
+    expect(config.android?.blockedPermissions).toEqual(
+      expect.arrayContaining([
+        'android.permission.READ_MEDIA_IMAGES',
+        'android.permission.READ_MEDIA_VIDEO',
+        'android.permission.READ_EXTERNAL_STORAGE',
+        'android.permission.WRITE_EXTERNAL_STORAGE',
+      ]),
+    );
+  });
+
+  it('declares UIKit scene lifecycle for Xcode 27 / iOS 27 simulators', () => {
+    const sceneManifest = config.ios?.infoPlist?.UIApplicationSceneManifest as
+      | Record<string, unknown>
+      | undefined;
+    expect(sceneManifest?.UISceneConfigurations).toBeDefined();
   });
 
   it('includes required iOS permission usage descriptions', () => {
@@ -35,9 +58,11 @@ describe('app.config', () => {
     const plugins = config.plugins ?? [];
     const pluginIds = plugins.map((plugin) => (Array.isArray(plugin) ? plugin[0] : plugin));
 
+    expect(pluginIds).toContain('./plugins/withIosSceneLifecycle.js');
     expect(pluginIds).toContain('./plugins/withIosUsageDescriptions.js');
     expect(pluginIds).toContain('./plugins/withHermesDsym.js');
     expect(pluginIds).toContain('./plugins/withAndroidReleaseSigning.js');
+    expect(pluginIds).toContain('./plugins/withAndroidPlayMediaCompliance.js');
     expect(pluginIds).toContain('expo-location');
   });
 });

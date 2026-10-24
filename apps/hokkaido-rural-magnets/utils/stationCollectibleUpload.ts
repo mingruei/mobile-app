@@ -91,6 +91,15 @@ async function ensureMediaLibraryPermission(): Promise<boolean> {
   return requested.granted;
 }
 
+async function ensureGalleryAccessForPicker(): Promise<boolean> {
+  if (Platform.OS === 'android') {
+    // Android Photo Picker grants access to user-selected files only.
+    return true;
+  }
+
+  return ensureMediaLibraryPermission();
+}
+
 async function withPickerTimeout<T>(promise: Promise<T>): Promise<T> {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
@@ -180,7 +189,7 @@ export async function pickCollectibleFromCamera(): Promise<CollectibleUploadSele
 export async function pickCollectibleFromGallery(): Promise<CollectibleUploadSelection[]> {
   await waitForNativePicker();
 
-  const granted = await ensureMediaLibraryPermission();
+  const granted = await ensureGalleryAccessForPicker();
   if (!granted) {
     throw new Error('media-permission-denied');
   }
@@ -192,6 +201,7 @@ export async function pickCollectibleFromGallery(): Promise<CollectibleUploadSel
         quality: 1,
         allowsEditing: false,
         base64: Platform.OS === 'android',
+        legacy: false,
       }),
     );
 

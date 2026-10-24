@@ -243,7 +243,8 @@ async function resolvePrefectureFromReverseGeocode(
   }
 }
 
-async function getCurrentJapanCoordinates(): Promise<JapanCoordinates | null> {
+/** Current device location when permission is granted and coordinates are in Japan. */
+export async function getCurrentLocationInJapan(): Promise<JapanCoordinates | null> {
   try {
     const existing = await Location.getForegroundPermissionsAsync();
     const permission =
@@ -268,6 +269,10 @@ async function getCurrentJapanCoordinates(): Promise<JapanCoordinates | null> {
   } catch {
     return null;
   }
+}
+
+async function getCurrentJapanCoordinates(): Promise<JapanCoordinates | null> {
+  return getCurrentLocationInJapan();
 }
 
 function filterFromPrefecture(

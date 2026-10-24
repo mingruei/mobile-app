@@ -8,6 +8,7 @@ jest.mock('expo-document-picker', () => ({
 
 import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
+import { Platform } from 'react-native';
 import DocumentScanner, {
   ScanDocumentResponseStatus,
 } from 'react-native-document-scanner-plugin';
@@ -104,7 +105,40 @@ describe('stationCollectibleUpload', () => {
   });
 
   describe('pickCollectibleFromGallery', () => {
-    it('throws media-permission-denied when photo access is rejected', async () => {
+    const originalOS = Platform.OS;
+
+    afterEach(() => {
+      Object.defineProperty(Platform, 'OS', {
+        configurable: true,
+        value: originalOS,
+      });
+    });
+
+    it('does not request media library permission on Android', async () => {
+      Object.defineProperty(Platform, 'OS', {
+        configurable: true,
+        value: 'android',
+      });
+
+      mockedImagePicker.launchImageLibraryAsync.mockResolvedValue({
+        canceled: true,
+        assets: null,
+      } as never);
+
+      await pickCollectibleFromGallery();
+
+      expect(mockedImagePicker.getMediaLibraryPermissionsAsync).not.toHaveBeenCalled();
+      expect(mockedImagePicker.requestMediaLibraryPermissionsAsync).not.toHaveBeenCalled();
+      expect(mockedImagePicker.launchImageLibraryAsync).toHaveBeenCalledWith(
+        expect.objectContaining({ legacy: false, mediaTypes: ['images'] }),
+      );
+    });
+
+    it('throws media-permission-denied when photo access is rejected on iOS', async () => {
+      Object.defineProperty(Platform, 'OS', {
+        configurable: true,
+        value: 'ios',
+      });
       mockedImagePicker.getMediaLibraryPermissionsAsync.mockResolvedValue({ granted: false } as never);
       mockedImagePicker.requestMediaLibraryPermissionsAsync.mockResolvedValue({ granted: false } as never);
 

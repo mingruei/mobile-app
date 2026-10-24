@@ -16,6 +16,7 @@ export type TranslationDictionary = {
     list: string;
     settings: string;
     group: string;
+    route: string;
   };
   map: {
     notVisited: string;
@@ -168,6 +169,47 @@ export type TranslationDictionary = {
     magnet: string;
     rowTotal: string;
     totalCount: string;
+  };
+  routePlan: {
+    title: string;
+    intro: string;
+    originLabel: string;
+    originPlaceholder: string;
+    originCurrentLocation: string;
+    originCurrentLocationLoading: string;
+    originCurrentLocationUnavailable: string;
+    useCurrentLocation: string;
+    destinationLabel: string;
+    destinationPlaceholder: string;
+    clearPlace: string;
+    noSuggestions: string;
+    googleAttribution: string;
+    apiKeyMissing: string;
+    selectedTitle: string;
+    selectedOrigin: string;
+    selectedDestination: string;
+    planRoute: string;
+    planning: string;
+    corridorLabel: string;
+    corridorValue: string;
+    corridorHint: string;
+    excludeLabel: string;
+    excludeVisited: string;
+    excludeHasMagnet: string;
+    excludeMagnetNotSold: string;
+    excludeHighways: string;
+    excludeTolls: string;
+    routeAvoidHint: string;
+    resultTitle: string;
+    resultCountDriving: string;
+    resultCountStraight: string;
+    routesFallback: string;
+    resultEmpty: string;
+    includeInRoute: string;
+    resultEmptyFilters: string;
+    mapsWaypointCount: string;
+    openInMaps: string;
+    routeNote: string;
   };
   station: {
     access: string;

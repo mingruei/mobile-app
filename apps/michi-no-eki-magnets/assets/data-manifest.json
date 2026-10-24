@@ -1,11 +1,11 @@
 {
-  "version": 3,
-  "updatedAt": "2026-08-21T12:49:40.084Z",
+  "version": 4,
+  "updatedAt": "2026-09-06T02:58:55.508Z",
   "files": {
     "stations": {
       "path": "stations.json",
-      "size": 763009,
-      "sha256": "8c7494f386aa4563c435abc417cffcf2ac13a2cd7f9930651ef5f9542eb2e076"
+      "size": 895698,
+      "sha256": "224e56e04b41cdc73a29bb6f0351d270c938d0a9ee80e75ebbbcdb974d1904e5"
     }
   }
 }

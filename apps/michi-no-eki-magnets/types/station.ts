@@ -11,6 +11,7 @@ export type Station = {
   latitude: number;
   longitude: number;
   shortDescription?: string | null;
+  imageUrl?: string | null;
   website?: string | null;
   access?: string | null;
   services: StationServiceId[];

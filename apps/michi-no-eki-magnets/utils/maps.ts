@@ -2,6 +2,7 @@ import { Linking, Platform } from 'react-native';
 
 import type { MapProvider } from '../types/mapProvider';
 import type { NavigationPoint } from '../types/navigation';
+import type { RouteRoadAvoidOptions } from './googleRoutes';
 
 function openUrl(url: string) {
   Linking.openURL(url).catch(() => undefined);
@@ -22,9 +23,35 @@ function formatCoordinates(latitude: number, longitude: number): string {
   return `${latitude},${longitude}`;
 }
 
-/** Google Maps queries use coordinates so 道の駅 names are not geocoded to the wrong place. */
+export type MapsRoutePoint = {
+  latitude: number;
+  longitude: number;
+  /** Used as name@lat,lng for waypoints and destination (not origin). */
+  label?: string;
+  /** Google Place ID — used for a Places-selected origin (with coordinates). */
+  placeId?: string;
+  /**
+   * When true, omit origin from the Google Maps URL so Maps uses the device's
+   * "Your location" / 你的位置. Prefer this for "目前位置" origins.
+   */
+  useDeviceLocation?: boolean;
+};
+
 function buildGoogleMapsCoordinatesQuery(latitude: number, longitude: number): string {
   return encodeQuery(formatCoordinates(latitude, longitude));
+}
+
+/** Works for waypoints/destination in Google Maps directions; origin must not use this format. */
+function buildGoogleMapsLabeledCoordinateQuery(
+  latitude: number,
+  longitude: number,
+  label?: string,
+): string {
+  const trimmed = label?.trim();
+  if (!trimmed) {
+    return buildGoogleMapsCoordinatesQuery(latitude, longitude);
+  }
+  return encodeQuery(`${trimmed}@${formatCoordinates(latitude, longitude)}`);
 }
 
 function buildGoogleMapsDirectionsUrl(
@@ -34,6 +61,83 @@ function buildGoogleMapsDirectionsUrl(
 ): string {
   const destination = buildGoogleMapsCoordinatesQuery(latitude, longitude);
   return `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=${travelmode}`;
+}
+
+function buildGoogleMapsAvoidParam(roadAvoid?: RouteRoadAvoidOptions): string | null {
+  if (!roadAvoid) {
+    return null;
+  }
+
+  const parts: string[] = [];
+  if (roadAvoid.avoidTolls) {
+    parts.push('tolls');
+  }
+  if (roadAvoid.avoidHighways) {
+    parts.push('highways');
+  }
+
+  return parts.length > 0 ? parts.join('%7C') : null;
+}
+
+export function buildGoogleMapsDrivingRouteUrl(
+  origin: MapsRoutePoint,
+  destination: MapsRoutePoint,
+  waypoints: ReadonlyArray<MapsRoutePoint> = [],
+  roadAvoid?: RouteRoadAvoidOptions,
+): string {
+  const destinationParam = buildGoogleMapsLabeledCoordinateQuery(
+    destination.latitude,
+    destination.longitude,
+    destination.label,
+  );
+  let url = `https://www.google.com/maps/dir/?api=1&destination=${destinationParam}&travelmode=driving`;
+
+  // Omit origin so Google Maps uses the live device location label ("你的位置").
+  // name@lat,lng fails for origin specifically; coordinates-only shows "已放置圖釘".
+  if (!origin.useDeviceLocation) {
+    const originParam = buildGoogleMapsCoordinatesQuery(origin.latitude, origin.longitude);
+    url += `&origin=${originParam}`;
+
+    const originPlaceId = origin.placeId?.trim();
+    if (originPlaceId) {
+      url += `&origin_place_id=${encodeQuery(originPlaceId)}`;
+    }
+  }
+
+  if (waypoints.length > 0) {
+    const waypointParam = waypoints
+      .map((point) =>
+        buildGoogleMapsLabeledCoordinateQuery(point.latitude, point.longitude, point.label),
+      )
+      .join('%7C');
+    url += `&waypoints=${waypointParam}`;
+  }
+
+  const avoidParam = buildGoogleMapsAvoidParam(roadAvoid);
+  if (avoidParam) {
+    url += `&avoid=${avoidParam}`;
+  }
+
+  return url;
+}
+
+export async function openMapsDrivingRoute(
+  provider: MapProvider,
+  origin: MapsRoutePoint,
+  destination: MapsRoutePoint,
+  waypoints: ReadonlyArray<MapsRoutePoint> = [],
+  roadAvoid?: RouteRoadAvoidOptions,
+) {
+  const webUrl = buildGoogleMapsDrivingRouteUrl(origin, destination, waypoints, roadAvoid);
+
+  if (waypoints.length === 0 && provider === 'apple') {
+    const coords = formatCoordinates(destination.latitude, destination.longitude);
+    const originCoords = formatCoordinates(origin.latitude, origin.longitude);
+    openAppleMapsUrl(`http://maps.apple.com/?saddr=${originCoords}&daddr=${coords}&dirflg=d`);
+    return;
+  }
+
+  openGoogleMapsUrl(webUrl);
 }
 
 function buildGoogleMapsPlaceUrl(latitude: number, longitude: number): string {

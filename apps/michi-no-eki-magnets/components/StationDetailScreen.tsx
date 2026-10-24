@@ -1,10 +1,12 @@
-import { useCallback } from 'react';
-import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { CheckOption } from '../components/CheckOption';
 import { StationCollectibleUploadSection } from '../components/StationCollectibleUploadSection';
 import { StationServicesSection } from '../components/StationServicesSection';
 import { colors } from '../constants/theme';
+import { useStationData } from '../hooks/useStationData';
+import { useStationPhotoUri } from '../hooks/useStationPhotoUri';
 import { useStationProgress } from '../hooks/useStationProgress';
 import { useMapProvider } from '../hooks/useMapProvider';
 import { useI18n } from '../i18n';
@@ -46,9 +48,22 @@ export function StationDetailScreen({
   onRegisterUpload,
 }: StationDetailScreenProps) {
   const { t } = useI18n();
+  const { version: stationDataVersion } = useStationData();
   const { mapProvider } = useMapProvider();
   const { getProgress, toggleProgress } = useStationProgress();
   const progress = getProgress(station.id);
+  const { uri: photoUri, resolved: photoResolved } = useStationPhotoUri(station, stationDataVersion);
+  const [photoFailed, setPhotoFailed] = useState(false);
+  const showPhoto = Boolean(photoUri && !photoFailed);
+  const showDescriptionSection = Boolean(
+    station.shortDescription
+    || showPhoto
+    || (station.imageUrl && !photoResolved),
+  );
+
+  useEffect(() => {
+    setPhotoFailed(false);
+  }, [station.id, photoUri]);
 
   const registerUpload = useCallback(
     (kind: CollectibleKind, uploadFromSource: (source: CollectibleUploadSource) => Promise<void>) => {
@@ -71,6 +86,24 @@ export function StationDetailScreen({
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <Text style={styles.name}>{station.name}</Text>
         {station.nameEn ? <Text style={styles.subtitle}>{station.nameEn}</Text> : null}
+
+        {showDescriptionSection ? (
+          <Section title={t('station.description')}>
+            {showPhoto ? (
+              <Image
+                source={{ uri: photoUri! }}
+                style={styles.photo}
+                resizeMode="cover"
+                accessibilityRole="image"
+                accessibilityLabel={station.name}
+                onError={() => setPhotoFailed(true)}
+              />
+            ) : null}
+            {station.shortDescription ? (
+              <Text style={styles.body}>{station.shortDescription}</Text>
+            ) : null}
+          </Section>
+        ) : null}
 
         <Section title={t('station.progress')}>
           <CheckOption
@@ -119,12 +152,6 @@ export function StationDetailScreen({
             <Text style={styles.navButtonLabel}>{t('station.openMap')}</Text>
           </Pressable>
         </Section>
-
-        {station.shortDescription ? (
-          <Section title={t('station.description')}>
-            <Text style={styles.body}>{station.shortDescription}</Text>
-          </Section>
-        ) : null}
 
         {station.website ? (
           <Pressable
@@ -186,6 +213,12 @@ const styles = StyleSheet.create({
     marginTop: 6,
     fontSize: 16,
     color: colors.textMuted,
+  },
+  photo: {
+    width: '100%',
+    aspectRatio: 16 / 9,
+    borderRadius: 12,
+    backgroundColor: colors.background,
   },
   section: {
     gap: 10,

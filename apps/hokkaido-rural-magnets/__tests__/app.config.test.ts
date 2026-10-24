@@ -2,9 +2,25 @@ import config from '../app.config';
 
 describe('app.config', () => {
   it('defines user-facing and Android version metadata', () => {
-    expect(config.version).toBe('1.0.0');
-    expect(config.ios?.buildNumber).toBe('4');
-    expect(config.android?.versionCode).toBe(4);
+    expect(config.version).toBe('1.0.1');
+    expect(config.ios?.buildNumber).toBe('5');
+    expect(config.android?.versionCode).toBe(5);
+  });
+
+  it('declares Android permissions without broad media library access', () => {
+    expect(config.android?.permissions).toEqual([
+      'ACCESS_COARSE_LOCATION',
+      'ACCESS_FINE_LOCATION',
+      'CAMERA',
+    ]);
+    expect(config.android?.blockedPermissions).toEqual(
+      expect.arrayContaining([
+        'android.permission.READ_MEDIA_IMAGES',
+        'android.permission.READ_MEDIA_VIDEO',
+        'android.permission.READ_EXTERNAL_STORAGE',
+        'android.permission.WRITE_EXTERNAL_STORAGE',
+      ]),
+    );
   });
 
   it('includes required iOS permission usage descriptions', () => {

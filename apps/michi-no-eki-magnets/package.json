@@ -1,6 +1,6 @@
 {
   "name": "michi-no-eki-magnets",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.ts",
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
@@ -47,6 +47,7 @@
     "build:android": "eas build --platform android --profile production",
     "build:android:local": "expo prebuild --platform android --no-install && cd android && ./gradlew bundleRelease",
     "verify:aab": "node scripts/verify-aab-version.mjs",
+    "verify:aab:permissions": "node scripts/verify-aab-permissions.mjs",
     "build:ios": "eas build --platform ios --profile production",
     "submit:android": "eas submit --platform android --profile production",
     "submit:ios": "eas submit --platform ios --profile production",

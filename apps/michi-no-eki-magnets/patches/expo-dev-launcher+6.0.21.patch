@@ -1,0 +1,14 @@
+diff --git a/node_modules/expo-dev-launcher/ios/ReactDelegateHandler/ExpoDevLauncherAppDelegateSubscriber.swift b/node_modules/expo-dev-launcher/ios/ReactDelegateHandler/ExpoDevLauncherAppDelegateSubscriber.swift
+index e7c1d24..3467b35 100644
+--- a/node_modules/expo-dev-launcher/ios/ReactDelegateHandler/ExpoDevLauncherAppDelegateSubscriber.swift
++++ b/node_modules/expo-dev-launcher/ios/ReactDelegateHandler/ExpoDevLauncherAppDelegateSubscriber.swift
+@@ -5,7 +5,8 @@ import ExpoModulesCore
+ public class ExpoDevLauncherAppDelegateSubscriber: ExpoAppDelegateSubscriber {
+   public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+     guard let window = UIApplication.shared.delegate?.window ?? UIApplication.shared.windows.filter { $0.isKeyWindow }.first else {
+-      fatalError("Cannot find the keyWindow. Make sure to call `window.makeKeyAndVisible()`.")
++      // UIScene apps create the window in SceneDelegate after didFinishLaunching returns.
++      return false
+     }
+     EXDevLauncherController.sharedInstance().autoSetupStart(window)
+     return false

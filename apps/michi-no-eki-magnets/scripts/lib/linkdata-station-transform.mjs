@@ -12,6 +12,7 @@ export const RDF_KEYS = {
   name: 'https://imilite.org/名称',
   nameEn: 'https://imilite.org/英語表記',
   summary: 'https://imilite.org/概要',
+  image: 'https://linkingopendata.com/local/画像',
   status: 'https://imilite.org/状態',
   address: 'https://imilite.org/住所',
   latitude: 'http://www.w3.org/2003/01/geo/wgs84_pos#lat',
@@ -103,6 +104,25 @@ export function parseLinkDataId(value) {
 }
 
 /**
+ * @param {string | null | undefined} value
+ */
+export function normalizeStationImageUrl(value) {
+  if (value == null || value.trim() === '') {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  if (
+    trimmed.includes('commons.wikimedia.org/wiki/Special:FilePath/') &&
+    !trimmed.includes('width=')
+  ) {
+    return `${trimmed}${trimmed.includes('?') ? '&' : '?'}width=800`;
+  }
+
+  return trimmed;
+}
+
+/**
  * @param {{
  *   linkdataId: string;
  *   designatedYear: string | null;
@@ -128,6 +148,7 @@ export function transformLinkDataRdf(records) {
     name: literal(entry, RDF_KEYS.name),
     nameEn: literal(entry, RDF_KEYS.nameEn),
     summary: literal(entry, RDF_KEYS.summary),
+    image: literal(entry, RDF_KEYS.image),
     status: literal(entry, RDF_KEYS.status),
     address: literal(entry, RDF_KEYS.address),
     latitude: literal(entry, RDF_KEYS.latitude),
@@ -213,6 +234,7 @@ export function transformLinkDataRdf(records) {
       latitude: Number(row.latitude),
       longitude: Number(row.longitude),
       shortDescription: row.summary,
+      imageUrl: normalizeStationImageUrl(row.image),
       website: row.website,
       access: row.route,
       services: row.services ?? [],
@@ -315,6 +337,7 @@ export function parseLinkDataCsv(csvText) {
       [RDF_KEYS.name]: [{ value: row['名称'] }],
       [RDF_KEYS.nameEn]: [{ value: row['英語表記'] }],
       [RDF_KEYS.summary]: [{ value: row['概要'] }],
+      [RDF_KEYS.image]: [{ value: row['画像'] }],
       [RDF_KEYS.status]: [{ value: row['状態'] }],
       [RDF_KEYS.address]: [{ value: row['住所'] }],
       [RDF_KEYS.latitude]: [{ value: row.lat }],

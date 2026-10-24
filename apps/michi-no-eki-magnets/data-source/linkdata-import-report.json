@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-21T12:49:40.043Z",
-  "source": "http://linkdata.org/api/1/rdf1s2861i/roadside_station.csv",
+  "generatedAt": "2026-09-06T02:58:55.470Z",
+  "source": "/Users/Jared/Projects/mobile-app/apps/michi-no-eki-magnets/data-source/linkdata-roadside-station.csv",
   "format": "csv",
   "stationCount": 1200,
   "skippedCount": 25,

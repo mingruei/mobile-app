@@ -12,7 +12,7 @@ const isProductionBuild = process.env.EAS_BUILD_PROFILE === 'production';
 const config: ExpoConfig = {
   name: '北海道鄉村標誌磁鐵收集帳',
   slug: 'hokkaido-rural-magnets',
-  version: '1.0.0',
+  version: '1.0.1',
   orientation: 'default',
   icon: './assets/icon.png',
   userInterfaceStyle: 'light',
@@ -63,7 +63,7 @@ const config: ExpoConfig = {
   ios: {
     supportsTablet: true,
     bundleIdentifier: 'com.hokkaidorural.magnets',
-    buildNumber: '4',
+    buildNumber: '5',
     infoPlist: {
       NSLocationWhenInUseUsageDescription: permissionMessages.location,
       NSLocationAlwaysUsageDescription: permissionMessages.location,
@@ -76,7 +76,7 @@ const config: ExpoConfig = {
   },
   android: {
     package: 'com.hokkaidorural.magnets',
-    versionCode: 4,
+    versionCode: 5,
     allowBackup: true,
     edgeToEdgeEnabled: true,
     softwareKeyboardLayoutMode: 'resize',
@@ -84,8 +84,14 @@ const config: ExpoConfig = {
       'ACCESS_COARSE_LOCATION',
       'ACCESS_FINE_LOCATION',
       'CAMERA',
-      'READ_MEDIA_IMAGES',
-      'READ_EXTERNAL_STORAGE',
+    ],
+    blockedPermissions: [
+      'android.permission.READ_MEDIA_IMAGES',
+      'android.permission.READ_MEDIA_VIDEO',
+      'android.permission.READ_MEDIA_AUDIO',
+      'android.permission.READ_MEDIA_VISUAL_USER_SELECTED',
+      'android.permission.READ_EXTERNAL_STORAGE',
+      'android.permission.WRITE_EXTERNAL_STORAGE',
     ],
     adaptiveIcon: {
       backgroundColor: '#1A3A6E',

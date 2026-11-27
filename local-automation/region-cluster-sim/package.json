@@ -1,0 +1,19 @@
+{
+  "name": "region-cluster-sim",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "sim": "tsx src/run.ts",
+    "sim:fixture": "tsx src/run.ts --kml fixtures/kyushu-sample.kml --days 4",
+    "test": "tsx --test src/**/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

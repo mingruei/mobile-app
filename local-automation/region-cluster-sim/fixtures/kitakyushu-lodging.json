@@ -1,0 +1,60 @@
+{
+  "tripStart": "oita",
+  "tripEnd": "saga",
+  "nights": [
+    {
+      "dayIndex": 1,
+      "label": "大分市",
+      "latitude": 33.2394,
+      "longitude": 131.6094
+    },
+    {
+      "dayIndex": 2,
+      "label": "由布院",
+      "latitude": 33.2627,
+      "longitude": 131.3551
+    },
+    {
+      "dayIndex": 3,
+      "label": "別府",
+      "latitude": 33.3165,
+      "longitude": 131.4842
+    },
+    {
+      "dayIndex": 4,
+      "label": "別府",
+      "latitude": 33.3165,
+      "longitude": 131.4842
+    },
+    {
+      "dayIndex": 5,
+      "label": "門司港",
+      "latitude": 33.9457,
+      "longitude": 130.9637
+    },
+    {
+      "dayIndex": 6,
+      "label": "福岡",
+      "latitude": 33.5902,
+      "longitude": 130.4207
+    },
+    {
+      "dayIndex": 7,
+      "label": "福岡",
+      "latitude": 33.5902,
+      "longitude": 130.4207
+    },
+    {
+      "dayIndex": 8,
+      "label": "福岡",
+      "latitude": 33.5902,
+      "longitude": 130.4207
+    },
+    {
+      "dayIndex": 9,
+      "label": "柳川",
+      "latitude": 33.1631,
+      "longitude": 130.4056
+    }
+  ]
+}

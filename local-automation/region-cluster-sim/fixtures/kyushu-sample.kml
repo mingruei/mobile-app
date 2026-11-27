@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>九州樣本</name>
+    <Placemark><name>府内城跡</name><Point><coordinates>131.6115,33.2407,0</coordinates></Point></Placemark>
+    <Placemark><name>臼杵城跡</name><Point><coordinates>131.8047,33.1256,0</coordinates></Point></Placemark>
+    <Placemark><name>岡城跡</name><Point><coordinates>131.4383,32.9692,0</coordinates></Point></Placemark>
+    <Placemark><name>別府地獄めぐり</name><Point><coordinates>131.4705,33.2831,0</coordinates></Point></Placemark>
+    <Placemark><name>湯布院金鱗湖</name><Point><coordinates>131.3578,33.2645,0</coordinates></Point></Placemark>
+    <Placemark><name>黒川温泉</name><Point><coordinates>131.1735,33.1641,0</coordinates></Point></Placemark>
+    <Placemark><name>阿蘇中岳</name><Point><coordinates>131.0911,32.8844,0</coordinates></Point></Placemark>
+    <Placemark><name>熊本城</name><Point><coordinates>130.7056,32.8062,0</coordinates></Point></Placemark>
+    <Placemark><name>福岡城跡</name><Point><coordinates>130.3831,33.5853,0</coordinates></Point></Placemark>
+    <Placemark><name>旧福岡城門</name><Point><coordinates>130.3838,33.5848,0</coordinates></Point></Placemark>
+    <Placemark><name>名島城跡</name><Point><coordinates>130.4247,33.6461,0</coordinates></Point></Placemark>
+    <Placemark><name>太宰府天満宮</name><Point><coordinates>130.5350,33.5211,0</coordinates></Point></Placemark>
+    <Placemark><name>門司港レトロ</name><Point><coordinates>130.9637,33.9457,0</coordinates></Point></Placemark>
+    <Placemark><name>唐津城</name><Point><coordinates>129.9782,33.4535,0</coordinates></Point></Placemark>
+    <Placemark><name>佐賀城公園</name><Point><coordinates>130.3025,33.2456,0</coordinates></Point></Placemark>
+    <Placemark><name>佐伯城跡</name><Point><coordinates>131.8992,32.9603,0</coordinates></Point></Placemark>
+  </Document>
+</kml>

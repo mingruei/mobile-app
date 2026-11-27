@@ -1,0 +1,60 @@
+{
+  "tripStart": "oita",
+  "tripEnd": "saga",
+  "nights": [
+    {
+      "dayIndex": 1,
+      "label": "別府温泉 杉乃井ホテル",
+      "latitude": 33.3165,
+      "longitude": 131.4842
+    },
+    {
+      "dayIndex": 2,
+      "label": "由布院温泉 ゆふいん山水館",
+      "latitude": 33.2627,
+      "longitude": 131.3551
+    },
+    {
+      "dayIndex": 3,
+      "label": "黒川温泉 御客屋",
+      "latitude": 33.1654,
+      "longitude": 131.1728
+    },
+    {
+      "dayIndex": 4,
+      "label": "阿蘇 内牧温泉 蘇山郷",
+      "latitude": 32.9502,
+      "longitude": 131.1163
+    },
+    {
+      "dayIndex": 5,
+      "label": "熊本 日航ホテル",
+      "latitude": 32.8032,
+      "longitude": 130.7068
+    },
+    {
+      "dayIndex": 6,
+      "label": "福岡 博多エクセルホテル東急",
+      "latitude": 33.5902,
+      "longitude": 130.4207
+    },
+    {
+      "dayIndex": 7,
+      "label": "福岡 博多エクセルホテル東急",
+      "latitude": 33.5902,
+      "longitude": 130.4207
+    },
+    {
+      "dayIndex": 8,
+      "label": "唐津 汐湯の宿 網元の宿",
+      "latitude": 33.4561,
+      "longitude": 129.9682
+    },
+    {
+      "dayIndex": 9,
+      "label": "佐賀 ホテルリソル佐賀",
+      "latitude": 33.2635,
+      "longitude": 130.3009
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "source": "Reconstructed from cloud-agent transcript sim reports (not original KML XML)",
+  "originalKmlPath": "/Users/Jared/Documents/北九州.kml",
+  "placeCount": 36,
+  "places": [
+    {
+      "placeIndex": 0,
+      "label": "Ito-koku History Museum",
+      "latitude": 33.5364,
+      "longitude": 130.2519
+    },
+    {
+      "placeIndex": 1,
+      "label": "大野城 百間石垣",
+      "latitude": 33.5431,
+      "longitude": 130.5208
+    },
+    {
+      "placeIndex": 2,
+      "label": "櫛田神社",
+      "latitude": 33.593,
+      "longitude": 130.4105
+    },
+    {
+      "placeIndex": 3,
+      "label": "Sakurai Futamigaura's Couple Stones",
+      "latitude": 33.6405,
+      "longitude": 130.1965
+    },
+    {
+      "placeIndex": 4,
+      "label": "皿倉山纜車 山麓站",
+      "latitude": 33.8567,
+      "longitude": 130.7964
+    },
+    {
+      "placeIndex": 5,
+      "label": "Furen Limestone Cave",
+      "latitude": 33.0105,
+      "longitude": 131.7352
+    },
+    {
+      "placeIndex": 6,
+      "label": "中津炸雞森山",
+      "latitude": 33.5821,
+      "longitude": 131.1839
+    },
+    {
+      "placeIndex": 7,
+      "label": "由布岳の風景",
+      "latitude": 33.2629,
+      "longitude": 131.3925
+    },
+    {
+      "placeIndex": 8,
+      "label": "telato",
+      "latitude": 33.2637,
+      "longitude": 131.357
+    },
+    {
+      "placeIndex": 9,
+      "label": "湯布院 炭焼おにぎり もぐもぐ",
+      "latitude": 33.2643,
+      "longitude": 131.3577
+    },
+    {
+      "placeIndex": 10,
+      "label": "豆田町商店街",
+      "latitude": 33.3266,
+      "longitude": 130.9364
+    },
+    {
+      "placeIndex": 11,
+      "label": "Nioza Historical Road",
+      "latitude": 33.1182,
+      "longitude": 131.7979
+    },
+    {
+      "placeIndex": 12,
+      "label": "Usuki Stone Buddhas",
+      "latitude": 33.0916,
+      "longitude": 131.7623
+    },
+    {
+      "placeIndex": 13,
+      "label": "門司港懷舊",
+      "latitude": 33.9462,
+      "longitude": 130.963
+    },
+    {
+      "placeIndex": 14,
+      "label": "元寇防壘（生之松原地區）",
+      "latitude": 33.5859,
+      "longitude": 130.3087
+    },
+    {
+      "placeIndex": 15,
+      "label": "謝国明の墓",
+      "latitude": 33.595,
+      "longitude": 130.419
+    },
+    {
+      "placeIndex": 16,
+      "label": "小倉碑文(宮本武蔵の碑)",
+      "latitude": 33.8904,
+      "longitude": 130.9144
+    },
+    {
+      "placeIndex": 17,
+      "label": "基肄(椽)城跡",
+      "latitude": 33.4444,
+      "longitude": 130.5105
+    },
+    {
+      "placeIndex": 18,
+      "label": "Kiyama Chomin Hall",
+      "latitude": 33.427,
+      "longitude": 130.524
+    },
+    {
+      "placeIndex": 19,
+      "label": "久留米城跡",
+      "latitude": 33.3286,
+      "longitude": 130.5078
+    },
+    {
+      "placeIndex": 20,
+      "label": "Mizuki Museum",
+      "latitude": 33.522,
+      "longitude": 130.4989
+    },
+    {
+      "placeIndex": 21,
+      "label": "福岡城 天守台跡",
+      "latitude": 33.5845,
+      "longitude": 130.3832
+    },
+    {
+      "placeIndex": 22,
+      "label": "大野城 心之鄉土館",
+      "latitude": 33.5347,
+      "longitude": 130.4803
+    },
+    {
+      "placeIndex": 23,
+      "label": "立花氏庭園 (松濤園)",
+      "latitude": 33.1578,
+      "longitude": 130.3979
+    },
+    {
+      "placeIndex": 24,
+      "label": "福岡市博物館",
+      "latitude": 33.5898,
+      "longitude": 130.3531
+    },
+    {
+      "placeIndex": 25,
+      "label": "萬松山 承天寺",
+      "latitude": 33.5953,
+      "longitude": 130.417
+    },
+    {
+      "placeIndex": 26,
+      "label": "崇福寺 山門（旧福岡城門）",
+      "latitude": 33.6053,
+      "longitude": 130.4148
+    },
+    {
+      "placeIndex": 27,
+      "label": "多賀神社",
+      "latitude": 33.7439,
+      "longitude": 130.7253
+    },
+    {
+      "placeIndex": 28,
+      "label": "福岡城",
+      "latitude": 33.5852,
+      "longitude": 130.3832
+    },
+    {
+      "placeIndex": 29,
+      "label": "佐伯市 歴史資料館",
+      "latitude": 32.957,
+      "longitude": 131.8926
+    },
+    {
+      "placeIndex": 30,
+      "label": "佐伯城跡",
+      "latitude": 32.9601,
+      "longitude": 131.8898
+    },
+    {
+      "placeIndex": 31,
+      "label": "Usuki City Tourist Exchange Plaza",
+      "latitude": 33.1203,
+      "longitude": 131.8003
+    },
+    {
+      "placeIndex": 32,
+      "label": "豊後森藩資料館",
+      "latitude": 33.3025,
+      "longitude": 131.1587
+    },
+    {
+      "placeIndex": 33,
+      "label": "中津城",
+      "latitude": 33.6067,
+      "longitude": 131.1864
+    },
+    {
+      "placeIndex": 34,
+      "label": "岡城跡",
+      "latitude": 32.9683,
+      "longitude": 131.4063
+    },
+    {
+      "placeIndex": 35,
+      "label": "府内城跡",
+      "latitude": 33.2405,
+      "longitude": 131.6114
+    }
+  ]
+}
